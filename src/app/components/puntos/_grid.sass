@@ -1,0 +1,53 @@
+.contenedor-bolsa
+    display: grid
+    grid-template-columns: 1fr
+    grid-template-rows: 0.3fr
+    grid-gap: 5px
+    justify-items: auto
+
+    .titulo-filtro     
+        justify-self: stretch
+
+    .tabla-datos
+        padding: 20px
+        justify-self: stretch
+
+    hr
+        display: block
+        height: 1px
+        border: 0
+        border-top: 1px solid #ccc
+        margin: 1em 0
+        padding: 0
+
+    .formBusq
+        display: grid
+        padding: 25px
+        grid-gap: 20px
+        grid-template-columns: repeat(4, 1fr)
+        justify-items: center
+        align-items: center
+        grid-template-areas: "cliente filtro fecha1 buscar" "cliente filtro fecha2 buscar"
+   
+
+        // justifi-content centrar toda grid horizontalmente
+        // // align-content centar toda grid verticalmente
+        .filtro-cliente          
+            grid-area: cliente
+
+            // para cada item alineacion:
+            //justify-self: stretch
+            // align-self:
+
+        .filtro-concepto
+            grid-row: filtro
+
+        .btn-bus
+            color: #E9E9E9
+            grid-area: buscar
+
+        .fecha1
+            grid-area: fecha1
+
+        .fecha2
+            grid-area: fecha2

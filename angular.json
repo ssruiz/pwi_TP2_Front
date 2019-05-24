@@ -23,9 +23,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              {
+                "input": "src/scss/my-theme.sass"
+              },        
+              "src/styles.sass"
             ],
-            "scripts": [],
+            "scripts": [            
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -80,7 +84,10 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+             {
+               "input": "src/scss/my-theme.sass"
+             }
+              
             ],
             "scripts": [],
             "assets": [
@@ -132,5 +139,14 @@
       }
     }
   },
-  "defaultProject": "tp2-pwi"
+  "defaultProject": "tp2-pwi",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "sass"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  }
 }

@@ -1,0 +1,40 @@
+<div class="contenedor-bolsa">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Utilización de Puntos</mat-card-title>
+
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <form class="formBusq" [formGroup]="_puntosService.formUso" (submit)="onSubmit()">
+
+        <mat-form-field class="filtro-cliente">
+          <mat-select class="place" placeholder="Seleccione un cliente" formControlName="cliente_id" [(value)]="selected">
+            <mat-option value="">Todos</mat-option>
+            <ng-container *ngFor="let cliente of clientes">
+              <mat-option value="{{cliente.id_cliente}}"> {{cliente.nombre + ' ' + cliente.apellido}} </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="filtro-concepto">
+          <mat-select class="place" placeholder="Seleccione un concepto" formControlName="concepto_id">
+            <mat-option value="todos">Todos</mat-option>
+            <ng-container *ngFor="let concepto of conceptos">
+              <mat-option value="{{concepto.id_concepto}}"> {{concepto.descripcion}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width">
+          <input matInput #postalCode maxlength="5" placeholder="Cantidad de puntos a usar:" value="" formControlName="puntaje">
+        </mat-form-field>
+
+        <button class="btn-bus" mat-raised-button color="primary" type="submit">Buscar</button>
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+  <mat-divider></mat-divider>
+</div>

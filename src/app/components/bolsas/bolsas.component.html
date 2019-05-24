@@ -1,0 +1,73 @@
+<div class="contenedor-bolsa">
+  <mat-card>
+    <mat-card-header >
+      <mat-card-title>Filtro de búsqueda</mat-card-title>
+      
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <form class="formBusq" [formGroup]="_bolsaService.form" (submit)="onSubmit()">
+
+        <mat-form-field class="filtro-cliente">
+          <mat-select class="place" placeholder="Seleccione un cliente" formControlName="cliente" [(value)]="selected">
+            <mat-option value="">Todos</mat-option>
+            <ng-container *ngFor="let cliente of clientes">
+              <mat-option value="{{cliente.id_cliente}}"> {{cliente.nombre + ' ' + cliente.apellido}} </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="filtro-filtro">
+          <mat-select class="place" placeholder="Seleccione una opción" formControlName="filtro">
+            <mat-option value="todos">Todos</mat-option>
+            <mat-option value="vencidos">Vencidos</mat-option>
+            <mat-option value="vigentes">Vigentes</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width">
+          <input matInput #postalCode maxlength="5" placeholder="Vence en:" value="" formControlName="vencimiento">
+          <mat-hint align="end">{{postalCode.value}} días</mat-hint>
+        </mat-form-field>
+
+
+        <button class="btn-bus" mat-raised-button color="primary" type="submit">Buscar</button>
+
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+  <mat-divider></mat-divider>
+  <div class=" tabla-datos">
+    <mat-table [dataSource]="bolsas" class="mat-elevation-z8" matSort>
+      <!-- Position Column -->
+      <ng-container matColumnDef="cliente">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cliente}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="puntaje_asignado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Puntaje Asignado </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.puntaje_asignado}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="puntaje_utilizado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Puntaje Utilizado </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.puntaje_utilizado}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="saldo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Saldo de Puntos </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.saldo}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+  </div>
+</div>

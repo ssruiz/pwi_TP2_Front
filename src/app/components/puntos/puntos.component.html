@@ -1,0 +1,79 @@
+<div class="contenedor-bolsa">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Filtro de búsqueda - Utilización de Puntos</mat-card-title>
+
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <form class="formBusq" [formGroup]="_puntosService.form" (submit)="onSubmit()">
+
+        <mat-form-field class="filtro-cliente">
+          <mat-select class="place" placeholder="Seleccione un cliente" formControlName="cliente" [(value)]="selected">
+            <mat-option value="">Todos</mat-option>
+            <ng-container *ngFor="let cliente of clientes">
+              <mat-option value="{{cliente.id_cliente}}"> {{cliente.nombre + ' ' + cliente.apellido}} </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="filtro-concepto">
+          <mat-select class="place" placeholder="Seleccione una opción" formControlName="concepto">
+            <mat-option value="todos">Todos</mat-option>
+            <ng-container *ngFor="let concepto of conceptos">
+              <mat-option value="{{concepto.id_concepto}}"> {{concepto.descripcion}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="fecha1">
+            <input matInput [matDatepicker]="picker" placeholder="Desde" formControlName="fi">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="fecha2">
+              <input matInput [matDatepicker]="picker2" placeholder="Hasta" formControlName="ff">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        <button class="btn-bus" mat-raised-button color="primary" type="submit">Buscar</button>
+
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+  <mat-divider></mat-divider>
+  <div class="tabla-datos">
+    <mat-table [dataSource]="puntos" class="mat-elevation-z8" matSort>
+      <!-- Position Column -->
+      <ng-container matColumnDef="cliente">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cliente}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="concepto">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Concepto </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.concepto}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="puntaje_utilizado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Puntaje Utilizado </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.puntaje_utilizado}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="fecha">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.fecha}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+  </div>
+</div>
